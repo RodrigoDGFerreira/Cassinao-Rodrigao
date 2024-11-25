@@ -24,7 +24,7 @@
                 <p class="text-white">Bem vindo ao Cassinão do Rodrigão.<br>Coloque seu nome abaixo!!</p>
                 <div class="text-white">
                   <label for="nome">Nome:</label>
-                  <input type="text" name="nome" id="nome" placeholder="Nome" required />
+                  <input type="text" name="nome" id="nome" placeholder="Nome" required autocomplete="off"/>
                 </div>
                 <div class="text-white mt-2">
                   <input type="checkbox" name="termos" id="termos">
@@ -46,7 +46,7 @@
                 <h5 class="h4 titulo">Depositar Fichas</h5>
                 <p class="text-white "><span id="nomeUsuario"></span> Quantas fichas você deseja depositar.</p>
                 <label for="deposito" class="text-white">Depositar: </label>
-                <input type="number" name="depositar" id="dep" placeholder="Depositar">
+                <input type="number" name="depositar" id="dep" placeholder="Depositar" autocomplete="off">
                 <button class="btn btn-danger" onclick="depositar()">Depositar</button>
               </div>
             </div>
@@ -107,7 +107,7 @@
             <div class="mt-5 text-center">
               <div>
                 <h5 class="h4 titulo">Coloque suas Fichas</h5>
-                <input type="number " class="" name="fichasApostada" id="fichasApostada" data-bs-theme="dark" />
+                <input type="number " class="" name="fichasApostada" id="fichasApostada" data-bs-theme="dark" autocomplete="off"/>
               </div>
               <button class="btn btn-warning mt-2" onclick="apostar()">Apostar</button>
               <h2 class="titulo mt-3" id="msg"></h2>
