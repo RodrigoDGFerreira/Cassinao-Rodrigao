@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cassino</title>
+    <link rel="stylesheet" href="./assets/style/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/style/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Ewert&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Honk&display=swap" rel="stylesheet" />
+  </head>
+  <body class="aaa">
+    <div class="container-fluid">
+      <header class="row header-rodondo">
+        <h1 class="titulo text-center my-5">Cassinão do Rodrigão</h1>
+        <h2 class="titulo">Cadastro e Depositar</h2>
+        <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
+          <div class="navbar-color p-4">
+            <div class="row">
+              <div class="col">
+                <h5 class="titulo h4">Cadastro de Usuario</h5>
+                <p class="text-white">Bem vindo ao Cassinão do Rodrigão.<br>Coloque seu nome abaixo!!</p>
+                <div class="text-white">
+                  <label for="nome">Nome:</label>
+                  <input type="text" name="nome" id="nome" placeholder="Nome" required />
+                </div>
+                <div class="text-white mt-2">
+                  <input type="checkbox" name="termos" id="termos">
+                  <p class="d-inline">Termos de Uso <a href="./Termo.html"  class="link-offset-2 link-underline link-underline-opacity-0">Ler termos</a></p>
+                </div>
+                <div class="text-white my-2">
+                  <div>
+                    <label for="trapaça">Trapaça</label>
+                  </div>
+                  <label for="sim">Sim:</label>
+                  <input type="radio" name="trapaca" id="sim" value="sim">
+                  <label for="nao">Não:</label>
+                  <input type="radio" name="trapaca" id="nao" value="nao" checked>
+                </div>
+                <button class="btn btn-danger" onclick="cadastrar()">Cadastrar</button>
+              </div>
+
+              <div class="col" id="invi">
+                <h5 class="h4 titulo">Depositar Fichas</h5>
+                <p class="text-white "><span id="nomeUsuario"></span> Quantas fichas você deseja depositar.</p>
+                <label for="deposito" class="text-white">Depositar: </label>
+                <input type="number" name="depositar" id="dep" placeholder="Depositar">
+                <button class="btn btn-danger" onclick="depositar()">Depositar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <nav class="navbar">
+          <div class="container-fluid">
+            <button
+              class="navbar-toggler btn-navbar"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarToggleExternalContent"
+              aria-controls="navbarToggleExternalContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+        </nav>
+      </header>
+      <section class="row">
+        <div class="d-flex mt-2">
+          <h2 class="titulo">Caça-Níqueis</h2>
+          <h2 class="titulo ms-auto" id="fichas">Fichas: <span id="fichasDep"></span></h2>
+        </div>
+      </section>
+      <div class="row mt-5"></div>
+      <section class="row">
+        <div class="col">
+          <div class="d-flex justify-content-center">
+
+            <div class="rolo mx-2">
+              <img
+              id="rolo1"
+              src="./assets/img/slots-seven.png"
+              alt="rolo1"
+              class="rolo-imagem"
+              />
+            </div>
+            <div class="rolo mx-2">
+              <img
+              id="rolo2"
+              src="./assets/img/slots-seven.png"
+              alt="rolo2"
+              class="rolo-imagem"
+              />
+            </div>
+            <div class="rolo mx-2">
+              <img
+              id="rolo3"
+              src="./assets/img/slots-seven.png"
+              alt="rolo3"
+              class="rolo-imagem"
+              />
+            </div>
+          </div>
+            <div class="mt-5 text-center">
+              <div>
+                <h5 class="h4 titulo">Coloque suas Fichas</h5>
+                <input type="number " class="" name="fichasApostada" id="fichasApostada" data-bs-theme="dark" />
+              </div>
+              <button class="btn btn-warning mt-2" onclick="apostar()">Apostar</button>
+              <h2 class="titulo mt-3" id="msg"></h2>
+            </div>
+        </div>
+        <div class="col" id="tabela">
+          <h3 class="titulo text-center">Ganhos e Perdas</h3>
+          <table class="mx-auto table table-bordered">
+            <thead>
+              <tr>
+                <th>Numero da Aposta</th>
+                <th>Valor Apostado</th>
+                <th>Resultado</th>
+                <th>Valor do Ganho/Perda</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </section>
+      <footer class="row bg-dark text-white fixed-bottom py-3 d-flex align-items-center">
+        <p class="text-center">© Todos os Direitos Reservados a Rodrigo Ferreira.</p>
+    </footer>
+
+    </div>
+    <script src="./assets/Script/bootstrap.min.js"></script>
+    <script src="./assets/Script/script.js"></script>
+  </body>
+</html>
