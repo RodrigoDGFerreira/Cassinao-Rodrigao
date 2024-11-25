@@ -1,125 +1,124 @@
-var trapaca,nome,fichas;
-let invisivel = document.getElementById('invi').style.display="none";
-let visiFichas = document.getElementById('fichas').style.display="none";
-fichas =0;
+var trapaca, nome, fichas = 0;
+let invisivel = document.getElementById('invi').style.display = "none";
+let visiFichas = document.getElementById('fichas').style.display = "none";
 let fichasApostada;
-function cadastrar(){
-  nome  =  document.getElementById('nome').value;
-  document.getElementById('nomeUsuario').innerHTML = nome;
-  invisivel = document.getElementById('invi').style.display="block";
-}
-function atualiazarFichas(){
-  document.getElementById('fichasDep').innerHTML = fichas;
-}
-function depositar(){
-  if(document.getElementById('dep').value <=0){
-    alert(`Deposite um valor maior que zero`);
-  }else{
-
-    fichas += parseInt(document.getElementById('dep').value);
-    visiFichas = document.getElementById('fichas').style.display="block";
-    document.getElementById('fichasDep').innerHTML = fichas;
-  }
-}
+let limiteAposta = 0;
+let contagem = 0;
+let inviTabela = document.getElementById('tabela').style.display = "none";
 const imagens = [
   "./assets/img/slots-berry.png",
   "./assets/img/slots-grape.png",
   "./assets/img/slots-lime.png",
   "./assets/img/slots-seven.png"
-]
-function sortear(){
-  return Math.floor(Math.random() * 4)+1;
+];
+
+// Função para cadastrar usuário
+function cadastrar() {
+  nome = document.getElementById('nome').value;
+  document.getElementById('nomeUsuario').innerHTML = nome;
+  document.getElementById('invi').style.display = "block";
 }
 
-function capRadioTrapaca(){
-  const capTrapaca =  document.querySelector('input[name="trapaca"]:checked');
-  trapaca = capTrapaca.value;
+// Função para atualizar fichas na tela
+function atualizarFichas() {
+  document.getElementById('fichasDep').innerHTML = fichas;
 }
-let limiteAposta = 0;
-let inviTabela = document.getElementById('tabela').style.display="none";
-let contagem=0;
-function apostar(){
+
+// Função para depositar fichas
+function depositar() {
+  const valorDeposito = parseInt(document.getElementById('dep').value);
+  if (valorDeposito > 0) {
+    fichas += valorDeposito;
+    document.getElementById('fichas').style.display = "block";
+    atualizarFichas();
+  } else {
+    alert('Deposite um valor maior que zero');
+  }
+}
+
+// Função para sortear números aleatórios
+function sortear() {
+  return Math.floor(Math.random() * 4);
+}
+
+// Função para capturar o valor do radio button de trapaça
+function capRadioTrapaca() {
+  const capTrapaca = document.querySelector('input[name="trapaca"]:checked');
+  trapaca = capTrapaca ? capTrapaca.value : "não";
+}
+
+// Função para realizar uma aposta
+function apostar() {
   limiteAposta++;
   contagem++;
-  inviTabela = document.getElementById('tabela').style.display="block"
-  let msg =  document.getElementById('msg');
+  document.getElementById('tabela').style.display = "block";
   capRadioTrapaca();
-  fichasApostada = document.getElementById('fichasApostada').value;
-  let numSorteado1,numSorteado2,numSorteado3;
-  let rolo1,rolo2,rolo3;
+  fichasApostada = parseInt(document.getElementById('fichasApostada').value);
+  let msg = document.getElementById('msg');
   let tbody = document.querySelector('tbody');
-  let linha = document.createElement('tr');
-  let nAposta = document.createElement('td');
-  let valorApostado = document.createElement('td');
-  let resultado = document.createElement('td');
-  let valorGanho = document.createElement('td');
-  nAposta.innerHTML = contagem;
-  valorApostado.innerHTML = fichasApostada;
-  if(limiteAposta>=7){
+
+  if (limiteAposta >= 7) {
     tbody.innerHTML = "";
-    limiteAposta=0;
+    limiteAposta = 0;
   }
-  if(trapaca =='sim'){
+
+  if (trapaca === 'sim') {
     const numSorteado = sortear();
-     rolo1 = document.getElementById('rolo1').src = imagens[numSorteado -1];
-     rolo2 = document.getElementById('rolo2').src = imagens[numSorteado -1];
-     rolo3 = document.getElementById('rolo3').src = imagens[numSorteado -1];
-     atualiazarFichas();
-     msg.innerHTML = `Parabens ${nome} Você ganhou Usando Trapaça`
-     resultado.innerHTML = "Trapaça"
-     
-     
-  }else{
-    if(fichas>=fichasApostada && fichasApostada !=0){
-    
-    numSorteado1 = sortear();
-    rolo1 = document.getElementById('rolo1').src = imagens[numSorteado1 -1];
-    
-    
-    numSorteado2 = sortear();
-    rolo2 = document.getElementById('rolo2').src = imagens[numSorteado2 -1];    
-    
-    numSorteado3 = sortear();
-    rolo3 = document.getElementById('rolo3').src = imagens[numSorteado3 -1];
-      
-      if(numSorteado1 == numSorteado2 && numSorteado1 == numSorteado3){
-        fichasApostada *= 2;
-        fichas +=fichasApostada;
-        atualiazarFichas();
-        msg.style.color="#23b505";
-        msg.innerHTML = `${nome} Você Ganhou!!!`;
-        resultado.innerHTML = "Ganhou"
-        valorGanho.innerHTML = `+${fichasApostada}`;
-        linha.classList.add("table-success")
-        linha.appendChild(nAposta);
-        linha.appendChild(valorApostado);
-        linha.appendChild(resultado);
-        linha.appendChild(valorGanho);
-        tbody.appendChild(linha);
-        if(nAposta<=6){
-          linha.removeEventListener
-        }
-      }else{
-        fichas -=fichasApostada;
-        atualiazarFichas();
-        msg.style.color="#fa0000";
-        msg.innerHTML = `${nome} Você Perdeu!!!`;
-        resultado.innerHTML = "Perdeu"
-        valorGanho.innerHTML = `-${fichasApostada}`;
-        linha.classList.add("table-danger")
-        linha.appendChild(nAposta);
-        linha.appendChild(valorApostado);
-        linha.appendChild(resultado);
-        linha.appendChild(valorGanho);
-        tbody.appendChild(linha);
-      }
-      
-    }else{
-      atualiazarFichas();
-        alert("Aposte algumas fichas!!!\nSaldo de fichas insuficiente!!!\nDeposite mais Fichas");
-      }
+    exibirRolos(numSorteado, numSorteado, numSorteado);
+    atualizarFichas();
+    exibirResultado(tbody, contagem, fichasApostada, "Trapaça", fichasApostada, true);
+    msg.innerHTML = `Parabéns ${nome}, Você ganhou Usando Trapaça!`;
+    return;
+  }
+
+  if (fichas >= fichasApostada && fichasApostada > 0) {
+    const numSorteado1 = sortear();
+    const numSorteado2 = sortear();
+    const numSorteado3 = sortear();
+    exibirRolos(numSorteado1, numSorteado2, numSorteado3);
+
+    if (numSorteado1 === numSorteado2 && numSorteado1 === numSorteado3) {
+      fichas += fichasApostada;
+      atualizarFichas();
+      exibirResultado(tbody, contagem, fichasApostada, "Ganhou", fichasApostada, true);
+      msg.style.color = "#23b505";
+      msg.innerHTML = `${nome}, Você Ganhou!!!`;
+    } else {
+      fichas -= fichasApostada;
+      atualizarFichas();
+      exibirResultado(tbody, contagem, fichasApostada, "Perdeu", -fichasApostada, false);
+      msg.style.color = "#fa0000";
+      msg.innerHTML = `${nome}, Você Perdeu!!!`;
+    }
+  } else {
+    atualizarFichas();
+    alert("Aposte algumas fichas!!!\nSaldo de fichas insuficiente!!!\nDeposite mais Fichas");
   }
 }
 
-//TODO: fazer uma um H2 que sinalize que o jogador ganhou com a trapaça ativa
-//TODO: fazer uma tabela que sinaliza os ganhos e perda so jogador com o textos vermrlho ou verde dependendo se ganhou ou nao
+// Função para exibir os rolos
+function exibirRolos(num1, num2, num3) {
+  document.getElementById('rolo1').src = imagens[num1];
+  document.getElementById('rolo2').src = imagens[num2];
+  document.getElementById('rolo3').src = imagens[num3];
+}
+
+// Função para exibir resultado da aposta e atualizar fichas
+function exibirResultado(tbody, contagem, valorApostado, resultadoTexto, valorGanho, ganhou) {
+  const linha = document.createElement('tr');
+  linha.classList.add(ganhou ? "table-success" : "table-danger");
+
+  linha.appendChild(criarCelula(contagem));
+  linha.appendChild(criarCelula(valorApostado));
+  linha.appendChild(criarCelula(resultadoTexto));
+  linha.appendChild(criarCelula(valorGanho > 0 ? `+${valorGanho}` : `${valorGanho}`));
+
+  tbody.appendChild(linha);
+}
+
+// Função auxiliar para criar células de tabela
+function criarCelula(conteudo) {
+  const celula = document.createElement('td');
+  celula.innerHTML = conteudo;
+  return celula;
+}
